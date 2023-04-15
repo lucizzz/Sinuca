@@ -78,8 +78,8 @@ class Ball {
     vx += gravity;
     x += vx;
     y += vy;
-    balls[4].vx=-2;
-    balls[4].vy=-1;
+    balls[balls.length-1].vx=-2;
+    balls[balls.length-1].vy=-1;
     if (x + diameter/2 > width) {
       x = width - diameter/2;
       vx *= friction; 
