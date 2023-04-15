@@ -15,14 +15,18 @@ Ball[] balls = new Ball[numBalls];
 void setup() {
   size(640, 360);
     for (int i = 0; i < numBalls-1; i++) {
-    balls[i] = new Ball(100+(i*100), 100+(i*100), 50, i, balls);
-    println("i fora do if: "+i);
+    balls[i] = new Ball(100+(i*100), 100+(i*100), 50, i, balls, 0, 0);
     if (i == numBalls-2){
-      
-      balls[i+1] = new Ball(width/2, height/2, 50, i, balls);
-      println("Aqui "+i);
+      println("i: "+i);
+      i++;
+      balls[i] = new Ball(width/2, height/2, 50, i, balls, -2, -2);
       
     }
+    
+    
+    //balls[balls.length-1].vx=-2; //bola oiginal
+    //balls[balls.length-1].vy=-1; //bola oiginal
+    
     }
   noStroke();
   fill(255, 204);
@@ -46,12 +50,16 @@ class Ball {
   int id;
   Ball[] others;
  
-  Ball(float xin, float yin, float din, int idin, Ball[] oin) {
+  Ball(float xin, float yin, float din, int idin, Ball[] oin, float vxa, float vya) {
+    println("vx, idin: "+vx+" "+idin);
+    println("vy, idin: "+vy+" "+idin);
     x = xin;
     y = yin;
     diameter = din;
     id = idin;
     others = oin;
+    vx=vxa;
+    vy=vya;
   } 
   
   void collide() {
@@ -78,8 +86,10 @@ class Ball {
     vx += gravity;
     x += vx;
     y += vy;
-    balls[balls.length-1].vx=-2;
-    balls[balls.length-1].vy=-1;
+    
+    //balls[balls.length-1].vx=-2; //bola oiginal
+    //balls[balls.length-1].vy=-1; //bola oiginal
+    
     if (x + diameter/2 > width) {
       x = width - diameter/2;
       vx *= friction; 
